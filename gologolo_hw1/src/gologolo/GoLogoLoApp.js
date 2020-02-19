@@ -17,3 +17,6 @@ let controller = new GoLogoLoController();
 // MAKE THE APP AND LAUNCH IT
 let app = new GoLogoLoApp(model, view, controller);
 app.launch("./src/gologolo/GoLogoLoData.json");
+//model.updateColor();
+
+//console.log("hi");

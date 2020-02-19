@@ -22,7 +22,6 @@ export default class GoLogoLoModel extends AppsterModel {
 
     buildAppWork(workArray, name) {
         let appWork = new GoLogoLoLogo();
-
         // FIND THE WORK DATA FROM THE JSON OBJECT
         for (let i = 0; i < workArray.length; i++) {
             let jsonWork = workArray[i];
@@ -40,11 +39,17 @@ export default class GoLogoLoModel extends AppsterModel {
                 appWork.setMargin(jsonWork.margin);
             }
         }
-
+        this.helper=appWork;
         return appWork;
     }
 
     updateText() {
  //       this.view.
+    }
+    //goal is to edi the json file
+    updateColor(){
+        
+        this.helper=appWork.setBackgroundColor("FF0000");
+
     }
 }
