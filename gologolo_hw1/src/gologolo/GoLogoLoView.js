@@ -97,7 +97,7 @@ export default class GoLogoLoView extends AppsterView {
         textDiv.style.borderRadius = work.getBorderRadius();
         textDiv.style.borderThickness = work.getBorderThickness();
         //need to add more here
-        
+        //textDiv.style.borderRadius
     }
 
     addListItem(initText) {
@@ -121,7 +121,13 @@ export default class GoLogoLoView extends AppsterView {
             elem.addEventListener("input", ()=>{
                 let logo=document.getElementById("gologolo_text");
                 let ob=document.getElementById(idValue);
-                logo.style[GoLogoLoAttr[idValue]]=ob.value;
+                //logo.style[GoLogoLoAttr[idValue]]=ob.value;
+                if(idValue.includes("slider")){
+                    logo.style[GoLogoLoAttr[idValue]]=ob.value+"px";
+                }
+                else{
+                    logo.style[GoLogoLoAttr[idValue]]=ob.value;
+                }
                 //it.currentWork[GoLogoLoAttr[idValue]]=ob.value;
             });
         }
