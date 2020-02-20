@@ -39,17 +39,16 @@ export default class GoLogoLoModel extends AppsterModel {
                 appWork.setMargin(jsonWork.margin);
             }
         }
-        this.helper=appWork;
         return appWork;
     }
 
     updateText() {
  //       this.view.
     }
-    //goal is to edi the json file
+    //goal is to edit the json file
     updateColor(){
         
-        this.helper=appWork.setBackgroundColor("FF0000");
+        
 
     }
 }

@@ -1,4 +1,4 @@
-import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText} from './GoLogoLoConstants.js'
+import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText, GoLogoLoAttr} from './GoLogoLoConstants.js'
 import {AppsterHTML, AppsterSymbols} from '../appster/AppsterConstants.js'
 import AppsterView from '../appster/AppsterView.js'
 
@@ -21,9 +21,8 @@ export default class GoLogoLoView extends AppsterView {
         let textColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_TEXT_COLOR_PICKER, [], colorPickerAttributes);
         let backgroundColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER, [], colorPickerAttributes);
         //testing
-        backgroundColorPicker.addEventListener("input", this.updateBackgroundColor);
-
-
+        //backgroundColorPicker.addEventListener("input", this.updateBackgroundColor);
+        //fontSizeSlider.addEventListener("input",this.updateTextSize);
         let borderColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_COLOR_PICKER, [], colorPickerAttributes);
         let borderRadiusSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
         let borderThicknessSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
@@ -31,6 +30,10 @@ export default class GoLogoLoView extends AppsterView {
         let marginSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_MARGIN_SLIDER, [], rangeAttributes);
         let textDiv = this.buildElement(AppsterHTML.DIV, GoLogoLoGUIId.GOLOGOLO_TEXT);
         let promptClass = [GoLogoLoGUIClass.GOLOGOLO_CONTROL_PROMPT];
+
+        //testing
+        //fontSizeSlider.addEventListener("input",this.updateTextSize);
+
         toolbar.appendChild(editTextButton);
         toolbar.appendChild(this.buildElement(AppsterHTML.BR));
         toolbar.appendChild(this.buildElement(AppsterHTML.SPAN, "", promptClass, [], GoLogoLoText.GOLOGOLO_FONT_SIZE_TEXT));
@@ -63,6 +66,8 @@ export default class GoLogoLoView extends AppsterView {
     }
 
     loadWork(work) {
+        this.currentWork=work;
+        
         let textDiv = document.getElementById(GoLogoLoGUIId.GOLOGOLO_TEXT);
         textDiv.innerHTML = work.getText();
         let fontSizeSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER);
@@ -91,6 +96,8 @@ export default class GoLogoLoView extends AppsterView {
         textDiv.style.borderColor = work.getBorderColor();
         textDiv.style.borderRadius = work.getBorderRadius();
         textDiv.style.borderThickness = work.getBorderThickness();
+        //need to add more here
+        
     }
 
     addListItem(initText) {
@@ -106,10 +113,43 @@ export default class GoLogoLoView extends AppsterView {
         let textList = document.getElementById(listItemId);
         textList.innerHTML += textList.innerHTML + letterToAppend;
     }
+
+    buildElement(elementType, idValue, classValues, attributesMap, textId, dataAnimation){
+        let elem=super.buildElement(elementType, idValue, classValues, attributesMap, textId, dataAnimation);
+        var it=this;
+        if (elementType==AppsterHTML.INPUT){
+            elem.addEventListener("input", ()=>{
+                let logo=document.getElementById("gologolo_text");
+                let ob=document.getElementById(idValue);
+                logo.style[GoLogoLoAttr[idValue]]=ob.value;
+                //it.currentWork[GoLogoLoAttr[idValue]]=ob.value;
+            });
+        }
+        return elem;
+    }
+
+
+
     //it works!!!!!! but is mostly hard coded 
     updateBackgroundColor= () => {
-        let thing=document.getElementById("gologolo_text");
+        let logo=document.getElementById("gologolo_text");
         let ob=document.getElementById(GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER);
-        thing.style.backgroundColor=ob.value;
+        //logo.style.backgroundColor=ob.value;
+        logo.style["backgroundColor"]=ob.value;
+        //logo.style.
+        this.currentWork.backgroundColor=ob.value;
+    }
+    updateStyle=()=>{
+        let logo=document.getElementById("gologolo_text");
+        let ob=document.getElementById(Go)
+        //logo.size.borderColorPicker
+        //logo.style.textC=ob.value;
+        //this.currentWork.
+    }
+    updateTextSize=()=>{
+        let logo=document.getElementById("gologolo_text");
+        let ob=document.getElementById(GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER);
+        logo.style["fontSizeAdjust"]=ob.value;
+        
     }
 }

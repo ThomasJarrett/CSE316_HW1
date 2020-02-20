@@ -28,6 +28,18 @@ export const GoLogoLoGUIId = {
     GOLOGOLO_MARGIN_SLIDER: "gologolo_margin_slider",
     GOLOGOLO_TEXT: "gologolo_text"
 };
+//given ID refers to attribute it changes
+export const GoLogoLoAttr={
+    gologolo_edit_text_button: "text",
+    gologolo_font_size_slider: "fontSize",
+    gologolo_text_color_picker: "color",
+    gologolo_background_color_picker: "backgroundColor",
+    gologolo_border_color_picker: "borderColor",
+    gologolo_border_radius_slider: "borderRadius",
+    gologolo_border_thickness_slider: "borderThickness",
+    gologolo_padding_slider: "padding",
+    gologolo_margin_slider: "margin"
+}
 
 export const GoLogoLoText = {
     GOLOGOLO_EDIT_TEXT_TEXT: "gologolo_edit_text_text",
