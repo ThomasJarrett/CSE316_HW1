@@ -36,7 +36,7 @@ export const GoLogoLoAttr={
     gologolo_background_color_picker: "backgroundColor",
     gologolo_border_color_picker: "borderColor",
     gologolo_border_radius_slider: "borderRadius",
-    gologolo_border_thickness_slider: "borderThickness",
+    gologolo_border_thickness_slider: "borderWidth",
     gologolo_padding_slider: "padding",
     gologolo_margin_slider: "margin"
 }

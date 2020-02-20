@@ -20,19 +20,13 @@ export default class GoLogoLoView extends AppsterView {
         let fontSizeSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER, [], rangeAttributes);
         let textColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_TEXT_COLOR_PICKER, [], colorPickerAttributes);
         let backgroundColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER, [], colorPickerAttributes);
-        //testing
-        //backgroundColorPicker.addEventListener("input", this.updateBackgroundColor);
-        //fontSizeSlider.addEventListener("input",this.updateTextSize);
         let borderColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_COLOR_PICKER, [], colorPickerAttributes);
         let borderRadiusSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
-        let borderThicknessSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
+        let borderThicknessSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_THICKNESS_SLIDER, [], rangeAttributes);
         let paddingSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_PADDING_SLIDER, [], rangeAttributes);
         let marginSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_MARGIN_SLIDER, [], rangeAttributes);
         let textDiv = this.buildElement(AppsterHTML.DIV, GoLogoLoGUIId.GOLOGOLO_TEXT);
         let promptClass = [GoLogoLoGUIClass.GOLOGOLO_CONTROL_PROMPT];
-
-        //testing
-        //fontSizeSlider.addEventListener("input",this.updateTextSize);
 
         toolbar.appendChild(editTextButton);
         toolbar.appendChild(this.buildElement(AppsterHTML.BR));
@@ -80,7 +74,7 @@ export default class GoLogoLoView extends AppsterView {
         borderColorPicker.value = work.getBorderColor();
         let borderRadiusSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER);
         borderRadiusSlider.value = work.getBorderRadius();
-        let borderThicknessSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER);
+        let borderThicknessSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_THICKNESS_SLIDER);
         borderThicknessSlider.value = work.getBorderThickness();
         let paddingSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_PADDING_SLIDER);
         paddingSlider.value = work.getPadding();
@@ -96,6 +90,8 @@ export default class GoLogoLoView extends AppsterView {
         textDiv.style.borderColor = work.getBorderColor();
         textDiv.style.borderRadius = work.getBorderRadius();
         textDiv.style.borderThickness = work.getBorderThickness();
+
+        textDiv.style.borderStyle="solid";
         //need to add more here
         //textDiv.style.borderRadius
     }
@@ -121,7 +117,6 @@ export default class GoLogoLoView extends AppsterView {
             elem.addEventListener("input", ()=>{
                 let logo=document.getElementById("gologolo_text");
                 let ob=document.getElementById(idValue);
-                //logo.style[GoLogoLoAttr[idValue]]=ob.value;
                 if(idValue.includes("slider")){
                     logo.style[GoLogoLoAttr[idValue]]=ob.value+"px";
                 }
@@ -145,17 +140,5 @@ export default class GoLogoLoView extends AppsterView {
         //logo.style.
         this.currentWork.backgroundColor=ob.value;
     }
-    updateStyle=()=>{
-        let logo=document.getElementById("gologolo_text");
-        let ob=document.getElementById(Go)
-        //logo.size.borderColorPicker
-        //logo.style.textC=ob.value;
-        //this.currentWork.
-    }
-    updateTextSize=()=>{
-        let logo=document.getElementById("gologolo_text");
-        let ob=document.getElementById(GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER);
-        logo.style["fontSizeAdjust"]=ob.value;
-        
-    }
+
 }
