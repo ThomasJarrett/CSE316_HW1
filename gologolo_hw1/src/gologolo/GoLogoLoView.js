@@ -1,4 +1,4 @@
-import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText, GoLogoLoAttr} from './GoLogoLoConstants.js'
+import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText, GoLogoLoAttr,GoLogoLoSetters} from './GoLogoLoConstants.js'
 import {AppsterHTML, AppsterSymbols} from '../appster/AppsterConstants.js'
 import AppsterView from '../appster/AppsterView.js'
 
@@ -88,9 +88,12 @@ export default class GoLogoLoView extends AppsterView {
         textDiv.style.color = work.getTextColor();
         textDiv.style.backgroundColor = work.getBackgroundColor();
         textDiv.style.borderColor = work.getBorderColor();
-        textDiv.style.borderRadius = work.getBorderRadius();
-        textDiv.style.borderThickness = work.getBorderThickness();
-
+        textDiv.style.borderRadius = work.getBorderRadius()+"px";
+        textDiv.style.borderWidth = work.getBorderThickness()+"px";
+        textDiv.style.padding=work.getPadding()+"px";
+        textDiv.style.margin=work.getMargin()+"px";
+        textDiv.style.fontSize=work.getFontSize()+"px";
+        
         textDiv.style.borderStyle="solid";
         //need to add more here
         //textDiv.style.borderRadius
@@ -117,13 +120,13 @@ export default class GoLogoLoView extends AppsterView {
             elem.addEventListener("input", ()=>{
                 let logo=document.getElementById("gologolo_text");
                 let ob=document.getElementById(idValue);
+                let value=ob.value;
                 if(idValue.includes("slider")){
-                    logo.style[GoLogoLoAttr[idValue]]=ob.value+"px";
+                    value=value+"px";
                 }
-                else{
-                    logo.style[GoLogoLoAttr[idValue]]=ob.value;
-                }
-                //it.currentWork[GoLogoLoAttr[idValue]]=ob.value;
+                logo.style[GoLogoLoAttr[idValue]]=value;
+                
+                it.currentWork[GoLogoLoSetters[idValue]]=ob.value;
             });
         }
         return elem;
@@ -140,5 +143,6 @@ export default class GoLogoLoView extends AppsterView {
         //logo.style.
         this.currentWork.backgroundColor=ob.value;
     }
+
 
 }

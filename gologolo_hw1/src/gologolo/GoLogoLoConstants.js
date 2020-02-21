@@ -40,6 +40,17 @@ export const GoLogoLoAttr={
     gologolo_padding_slider: "padding",
     gologolo_margin_slider: "margin"
 }
+export const GoLogoLoSetters={
+    gologolo_edit_text_button: "text",
+    gologolo_font_size_slider: "fontSize",//works
+    gologolo_text_color_picker: "textColor",//works
+    gologolo_background_color_picker: "backgroundColor",//works
+    gologolo_border_color_picker: "borderColor",//works
+    gologolo_border_radius_slider: "borderRadius",//works
+    gologolo_border_thickness_slider: "borderThickness",//works
+    gologolo_padding_slider: "padding",//works
+    gologolo_margin_slider: "margin"//works
+}
 
 export const GoLogoLoText = {
     GOLOGOLO_EDIT_TEXT_TEXT: "gologolo_edit_text_text",
