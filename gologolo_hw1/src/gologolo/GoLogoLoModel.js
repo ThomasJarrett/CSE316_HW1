@@ -43,12 +43,8 @@ export default class GoLogoLoModel extends AppsterModel {
     }
 
     updateText() {
- //       this.view.
+        //this.view.
     }
-    //goal is to edit the json file
-    updateColor(){
-        
-        
+    
 
-    }
 }

@@ -28,6 +28,9 @@ export default class GoLogoLoView extends AppsterView {
         let textDiv = this.buildElement(AppsterHTML.DIV, GoLogoLoGUIId.GOLOGOLO_TEXT);
         let promptClass = [GoLogoLoGUIClass.GOLOGOLO_CONTROL_PROMPT];
 
+        
+        this.buildTextButton(editTextButton);
+
         toolbar.appendChild(editTextButton);
         toolbar.appendChild(this.buildElement(AppsterHTML.BR));
         toolbar.appendChild(this.buildElement(AppsterHTML.SPAN, "", promptClass, [], GoLogoLoText.GOLOGOLO_FONT_SIZE_TEXT));
@@ -117,7 +120,7 @@ export default class GoLogoLoView extends AppsterView {
         let elem=super.buildElement(elementType, idValue, classValues, attributesMap, textId, dataAnimation);
         var it=this;
         if (elementType==AppsterHTML.INPUT){
-            elem.addEventListener("input", ()=>{
+            elem.addEventListener(elementType, ()=>{
                 let logo=document.getElementById("gologolo_text");
                 let ob=document.getElementById(idValue);
                 let value=ob.value;
@@ -134,15 +137,40 @@ export default class GoLogoLoView extends AppsterView {
 
 
 
-    //it works!!!!!! but is mostly hard coded 
-    updateBackgroundColor= () => {
-        let logo=document.getElementById("gologolo_text");
-        let ob=document.getElementById(GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER);
-        //logo.style.backgroundColor=ob.value;
-        logo.style["backgroundColor"]=ob.value;
-        //logo.style.
-        this.currentWork.backgroundColor=ob.value;
+    buildTextButton(elem){
+        elem.innerHTML="Edit Text";
+        //let element=document.createElement("div");
+       // element.setAttribute("class","modal");
+       // element.setAttribute("id","TextEditModal");
+
+        let modalContent=this.buildElement("div","TextEditModal");
+        var x = document.createElement("INPUT");
+        x.setAttribute("id",GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR);
+        x.setAttribute("type", "text");
+        let it=this;
+        x.addEventListener("input",()=>{
+            let logo=document.getElementById("gologolo_text");
+            let value=x.value;
+            logo.innerHTML=value;
+            it.currentWork[GoLogoLoSetters[GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR]]=value;
+        });
+        let innerModal=this.buildInnerModal();
+
+        modalContent.appendChild(innerModal);
+        elem.appendChild(modalContent);
+        modalContent.style.display="none";
+        elem.addEventListener("click",()=>{
+            modalContent.style.display="block";
+            x.value=it.currentWork.getText();
+        });
+    } 
+
+    buildInnerModal(){
+        let elem=document.createElement("div");
+        elem.setAttribute("id","innerModal");
+        return elem;
     }
+    
 
 
 }

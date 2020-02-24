@@ -26,7 +26,8 @@ export const GoLogoLoGUIId = {
     GOLOGOLO_BORDER_THICKNESS_SLIDER: "gologolo_border_thickness_slider",
     GOLOGOLO_PADDING_SLIDER: "gologolo_padding_slider",
     GOLOGOLO_MARGIN_SLIDER: "gologolo_margin_slider",
-    GOLOGOLO_TEXT: "gologolo_text"
+    GOLOGOLO_TEXT: "gologolo_text",
+    GOLOGOLO_EDIT_TEXT_BAR: "gologolo_edit_text_bar"
 };
 //given ID refers to attribute it changes
 export const GoLogoLoAttr={
@@ -38,7 +39,8 @@ export const GoLogoLoAttr={
     gologolo_border_radius_slider: "borderRadius",
     gologolo_border_thickness_slider: "borderWidth",
     gologolo_padding_slider: "padding",
-    gologolo_margin_slider: "margin"
+    gologolo_margin_slider: "margin",
+    gologolo_edit_text_bar: "text"
 }
 export const GoLogoLoSetters={
     gologolo_edit_text_button: "text",
@@ -49,7 +51,8 @@ export const GoLogoLoSetters={
     gologolo_border_radius_slider: "borderRadius",//works
     gologolo_border_thickness_slider: "borderThickness",//works
     gologolo_padding_slider: "padding",//works
-    gologolo_margin_slider: "margin"//works
+    gologolo_margin_slider: "margin",//works
+    gologolo_edit_text_bar: "text"
 }
 
 export const GoLogoLoText = {
