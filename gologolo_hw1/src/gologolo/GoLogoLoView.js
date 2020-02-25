@@ -145,12 +145,7 @@ export default class GoLogoLoView extends AppsterView {
 
         //let modalContent=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
         let it=this;
-       /* x.addEventListener("input",()=>{
-            let logo=document.getElementById("gologolo_text");
-            let value=x.value;
-            logo.innerHTML=value;
-            it.currentWork[GoLogoLoSetters[GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR]]=value;
-        });*/
+       
         
        // elem.appendChild(modalContent);
         //it.showElement(modalContent,false);
@@ -163,7 +158,20 @@ export default class GoLogoLoView extends AppsterView {
             it.displayElement(temp);
             //it.displayElement(modalContent,"block");
             //modalContent.style.display="block";
-           // x.value=it.currentWork.getText();
+            let textInput=document.getElementById("appster_text_input_modal_textfield");
+            textInput.value=it.currentWork.getText();
+            let enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
+            enterButton.addEventListener("click",()=>{
+                let logo=document.getElementById("gologolo_text");
+                let value=textInput.value;
+                logo.innerHTML=value;
+                it.currentWork[GoLogoLoSetters[GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR]]=value;
+                it.hideElement(temp);
+            });
+            let cancleButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON);
+            cancleButton.addEventListener("click",()=>{
+                it.hideElement(temp);
+            })
         });
     } 
 
@@ -174,8 +182,10 @@ export default class GoLogoLoView extends AppsterView {
     }
 
     displayElement(element) {
-        element.classList.add(AppsterGUIClass.IS_VISIBLE);
-        
+        element.classList.add(AppsterGUIClass.IS_VISIBLE);  
+    }
+    hideElement(element){
+        element.classList.remove(AppsterGUIClass.IS_VISIBLE);
     }
     
 
