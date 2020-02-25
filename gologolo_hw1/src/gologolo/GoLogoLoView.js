@@ -98,8 +98,6 @@ export default class GoLogoLoView extends AppsterView {
         textDiv.style.fontSize=work.getFontSize()+"px";
         
         textDiv.style.borderStyle="solid";
-        //need to add more here
-        //textDiv.style.borderRadius
     }
 
     addListItem(initText) {
@@ -126,6 +124,9 @@ export default class GoLogoLoView extends AppsterView {
                 let value=ob.value;
                 if(idValue.includes("slider")){
                     value=value+"px";
+                    if(idValue==GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER && value=="0px"){
+                        value="1px";
+                    }
                 }
                 logo.style[GoLogoLoAttr[idValue]]=value;
                 
@@ -139,25 +140,10 @@ export default class GoLogoLoView extends AppsterView {
 
     buildTextButton(elem){
         elem.innerHTML="Edit Text";
-        //let element=document.createElement("div");
-       // element.setAttribute("class","modal");
-       // element.setAttribute("id","TextEditModal");
-
-        //let modalContent=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
         let it=this;
-       
-        
-       // elem.appendChild(modalContent);
-        //it.showElement(modalContent,false);
-        //this.displayElement(modalContent,"none");
-        //it.showElementWithId(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL,false);
         elem.addEventListener("click",()=>{
-            //it.showElement(document.getElementById("appster_edit_screen"),false);
-            //it.showElementWithId(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL,true);
             let temp=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
             it.displayElement(temp);
-            //it.displayElement(modalContent,"block");
-            //modalContent.style.display="block";
             let textInput=document.getElementById("appster_text_input_modal_textfield");
             textInput.value=it.currentWork.getText();
             let enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
@@ -174,12 +160,6 @@ export default class GoLogoLoView extends AppsterView {
             })
         });
     } 
-
-    buildInnerModal(){
-        let elem=document.createElement("div");
-        elem.setAttribute("id","innerModal");
-        return elem;
-    }
 
     displayElement(element) {
         element.classList.add(AppsterGUIClass.IS_VISIBLE);  
