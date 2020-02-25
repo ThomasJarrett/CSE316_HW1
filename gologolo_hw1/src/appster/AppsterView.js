@@ -484,8 +484,12 @@ export default class AppsterView {
        if (!element)
            console.log("WHAT?");
        element.hidden = !show;
-       if (show)
+       console.log(element.hidden);
+       if (show){
            console.log(element);
+           
+       }
+        
 
        // NOW HIDE FROM ALL THE CHILDREN
        if (element.hasChildNodes()) {

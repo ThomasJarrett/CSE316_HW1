@@ -1,5 +1,5 @@
 import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText, GoLogoLoAttr,GoLogoLoSetters} from './GoLogoLoConstants.js'
-import {AppsterHTML, AppsterSymbols} from '../appster/AppsterConstants.js'
+import {AppsterHTML, AppsterSymbols, AppsterGUIId, AppsterGUIClass} from '../appster/AppsterConstants.js'
 import AppsterView from '../appster/AppsterView.js'
 
 export default class GoLogoLoView extends AppsterView {
@@ -143,25 +143,27 @@ export default class GoLogoLoView extends AppsterView {
        // element.setAttribute("class","modal");
        // element.setAttribute("id","TextEditModal");
 
-        let modalContent=this.buildElement("div","TextEditModal");
-        var x = document.createElement("INPUT");
-        x.setAttribute("id",GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR);
-        x.setAttribute("type", "text");
+        //let modalContent=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
         let it=this;
-        x.addEventListener("input",()=>{
+       /* x.addEventListener("input",()=>{
             let logo=document.getElementById("gologolo_text");
             let value=x.value;
             logo.innerHTML=value;
             it.currentWork[GoLogoLoSetters[GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BAR]]=value;
-        });
-        let innerModal=this.buildInnerModal();
-
-        modalContent.appendChild(innerModal);
-        elem.appendChild(modalContent);
-        modalContent.style.display="none";
+        });*/
+        
+       // elem.appendChild(modalContent);
+        //it.showElement(modalContent,false);
+        //this.displayElement(modalContent,"none");
+        //it.showElementWithId(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL,false);
         elem.addEventListener("click",()=>{
-            modalContent.style.display="block";
-            x.value=it.currentWork.getText();
+            //it.showElement(document.getElementById("appster_edit_screen"),false);
+            //it.showElementWithId(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL,true);
+            let temp=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
+            it.displayElement(temp);
+            //it.displayElement(modalContent,"block");
+            //modalContent.style.display="block";
+           // x.value=it.currentWork.getText();
         });
     } 
 
@@ -169,6 +171,11 @@ export default class GoLogoLoView extends AppsterView {
         let elem=document.createElement("div");
         elem.setAttribute("id","innerModal");
         return elem;
+    }
+
+    displayElement(element) {
+        element.classList.add(AppsterGUIClass.IS_VISIBLE);
+        
     }
     
 
