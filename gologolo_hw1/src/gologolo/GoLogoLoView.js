@@ -15,16 +15,16 @@ export default class GoLogoLoView extends AppsterView {
 
         // FIRST MAKE THE TOOLBAR
         let toolbar = this.buildElement(AppsterHTML.DIV, GoLogoLoGUIId.GOLOGOLO_TOOLBAR);
-        let editTextButton = this.buildElement(AppsterHTML.BUTTON, GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BUTTON, [], [], GoLogoLoText.GOLOGOLO_EDIT_TEXT_TEXT);
+        let editTextButton = this.buildElement2(AppsterHTML.BUTTON, GoLogoLoGUIId.GOLOGOLO_EDIT_TEXT_BUTTON, [], [], GoLogoLoText.GOLOGOLO_EDIT_TEXT_TEXT);
         editTextButton.innerHTML = AppsterSymbols.EDIT;
-        let fontSizeSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER, [], rangeAttributes);
-        let textColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_TEXT_COLOR_PICKER, [], colorPickerAttributes);
-        let backgroundColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER, [], colorPickerAttributes);
-        let borderColorPicker = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_COLOR_PICKER, [], colorPickerAttributes);
-        let borderRadiusSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
-        let borderThicknessSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_THICKNESS_SLIDER, [], rangeAttributes);
-        let paddingSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_PADDING_SLIDER, [], rangeAttributes);
-        let marginSlider = this.buildElement(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_MARGIN_SLIDER, [], rangeAttributes);
+        let fontSizeSlider = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER, [], rangeAttributes);
+        let textColorPicker = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_TEXT_COLOR_PICKER, [], colorPickerAttributes);
+        let backgroundColorPicker = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER, [], colorPickerAttributes);
+        let borderColorPicker = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_COLOR_PICKER, [], colorPickerAttributes);
+        let borderRadiusSlider = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER, [], rangeAttributes);
+        let borderThicknessSlider = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_BORDER_THICKNESS_SLIDER, [], rangeAttributes);
+        let paddingSlider = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_PADDING_SLIDER, [], rangeAttributes);
+        let marginSlider = this.buildElement2(AppsterHTML.INPUT, GoLogoLoGUIId.GOLOGOLO_MARGIN_SLIDER, [], rangeAttributes);
         let textDiv = this.buildElement(AppsterHTML.DIV, GoLogoLoGUIId.GOLOGOLO_TEXT);
         let promptClass = [GoLogoLoGUIClass.GOLOGOLO_CONTROL_PROMPT];
 
@@ -114,7 +114,7 @@ export default class GoLogoLoView extends AppsterView {
         textList.innerHTML += textList.innerHTML + letterToAppend;
     }
 
-    buildElement(elementType, idValue, classValues, attributesMap, textId, dataAnimation){
+    buildElement2(elementType, idValue, classValues, attributesMap, textId, dataAnimation){
         let elem=super.buildElement(elementType, idValue, classValues, attributesMap, textId, dataAnimation);
         var it=this;
         if (elementType==AppsterHTML.INPUT){
@@ -141,11 +141,14 @@ export default class GoLogoLoView extends AppsterView {
     buildTextButton(elem){
         elem.innerHTML="Edit Text";
         let it=this;
+        this.resetButtonsForTextInputModal();
         elem.addEventListener("click",()=>{
+            it.resetButtonsForTextInputModal();
             let temp=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
             it.displayElement(temp);
             let textInput=document.getElementById("appster_text_input_modal_textfield");
             textInput.value=it.currentWork.getText();
+            it.changeTextInputModalWords();
             let enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
             enterButton.addEventListener("click",()=>{
                 let logo=document.getElementById("gologolo_text");
@@ -159,14 +162,28 @@ export default class GoLogoLoView extends AppsterView {
                 it.hideElement(temp);
             })
         });
-    } 
+    }
 
-    displayElement(element) {
-        element.classList.add(AppsterGUIClass.IS_VISIBLE);  
+    resetButtonsForTextInputModal(){
+        this.resetElement(document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON));
+        this.resetElement(document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON));
     }
-    hideElement(element){
-        element.classList.remove(AppsterGUIClass.IS_VISIBLE);
+    changeTextInputModalWords(){
+        let modalHeader=document.getElementById("appster_text_input_modal_section");
+        modalHeader.firstChild.firstChild.innerHTML="Enter the text for your Logo";
+        let modalFrame=document.getElementById("appster_text_input_modal_frame");
+        modalFrame.lastChild.innerHTML="Changing the Text";
     }
+    resetElement(element){
+        if(element){
+            var newElem=element.cloneNode(true);
+            element.parentNode.replaceChild(newElem, element);
+        }
+    }
+
+    
+
+         
     
 
 

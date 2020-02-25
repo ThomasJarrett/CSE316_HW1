@@ -1,5 +1,5 @@
-import {AppsterCallback, AppsterGUIId, AppsterHTML} from './AppsterConstants.js'
-
+import {AppsterCallback, AppsterGUIId, AppsterHTML, AppsterGUIClass} from './AppsterConstants.js'
+import AppWork from '../appster/AppWork.js'
 export default class AppsterController {
     constructor() {
         this.model = null;
@@ -86,13 +86,13 @@ export default class AppsterController {
      * This function is called when the user requests to create
      * new work.
      */
-    processCreateNewWork() {
+    processCreateNewWork=()=> {
         console.log("processCreateNewWork");
 
         // PROMPT FOR THE NAME OF THE NEW LIST
-        
+        this.buildNamePrompt();
         // MAKE A BRAND NEW LIST
-        this.model.goList();
+        //this.model.goList();
     }
 
     /**
@@ -157,4 +157,103 @@ export default class AppsterController {
         // VERIFY VIA A DIALOG BOX
         window.todo.model.view.showDialog();
     }
+
+    /**
+     * verifies that a name is valid
+     * @param {String} str 
+     */
+    validName(str){
+        if(str.length>0){
+            for (let i = 0; i < this.model.recentWork.length; i++) {
+                let testWork = this.model.recentWork[i];
+                if (testWork.getName() === str)
+                    return false
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * calls the text input modal to get a string
+     */
+    buildNamePrompt(elem){
+        //elem.innerHTML="Edit Text";
+        let it=this;
+        this.changeTextInputModalWords();
+        let temp=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
+        it.displayElement(temp);
+        let textInput=document.getElementById("appster_text_input_modal_textfield");
+        textInput.value="";
+        
+        let enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
+        this.resetElement(enterButton);
+        enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
+        
+        enterButton.remove
+        enterButton.addEventListener("click",()=>{
+            let name=textInput.value;
+            if(this.validName(name)){
+                console.log("valid");
+                it.removeErrorMessage();
+                it.hideElement(temp);
+                it.createNewWork(name);
+            }
+            else{
+                it.addErrorMessage();
+                
+            }
+            
+        });
+        this.resetElement(document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON));
+        let cancleButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON);
+
+        cancleButton.addEventListener("click",()=>{
+                it.removeErrorMessage();
+                it.hideElement(temp);
+                
+        })
+        
+    }
+
+    displayElement(element) {
+        element.classList.add(AppsterGUIClass.IS_VISIBLE);  
+    }
+    hideElement(element){
+        
+        element.classList.remove(AppsterGUIClass.IS_VISIBLE);
+    }
+    //define in child class
+    changeTextInputModalWords(){
+        
+    }
+    //define in child class
+    addErrorMessage(){
+        //error message id is error_message
+    }
+    removeErrorMessage(){
+        let temp=document.getElementById("error_message");
+        //console.log(temp);
+        if(temp){
+            temp.parentNode.removeChild(temp);
+            //this.removeErrorMessage();
+            //console.log(temp);
+        }
+        temp=document.getElementById("error_message");
+        console.log(temp);
+
+    }
+    /*
+    * creates new work with name workName
+    */
+   createNewWork(workName){
+       let tempWork=new AppWork(workName);
+       this.model.appendWork(tempWork);
+   }
+   resetElement(element){
+    if(element){
+        var newElem=element.cloneNode(true);
+        element.parentNode.replaceChild(newElem, element);
+    }
+   }
 }

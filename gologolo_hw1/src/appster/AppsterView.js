@@ -527,4 +527,10 @@ export default class AppsterView {
        let dialog = document.getElementById(AppsterGUIId.MODAL_YES_NO_DIALOG);
        dialog.classList.add(AppsterGUIClass.IS_VISIBLE);
    }
+   displayElement(element) {
+        element.classList.add(AppsterGUIClass.IS_VISIBLE);  
+    }
+    hideElement(element){
+        element.classList.remove(AppsterGUIClass.IS_VISIBLE);
+    }
 }
