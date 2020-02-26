@@ -142,8 +142,8 @@ export default class AppsterController {
      */
     processConfirmDeleteWork=()=> {
         // DELETE THE WORK
-        this.model.removeWork(this.model.getWorkToEdit());
-
+        this.model.removeWork(this.model.view.currentWork);
+        this.model.view.hideDialog();
         // GO BACK TO THE HOME SCREEN
         this.model.goHome();
     }

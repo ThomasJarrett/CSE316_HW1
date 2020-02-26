@@ -4,6 +4,7 @@ export default class AppsterView {
     constructor() {
         this.appText = new Array();
         this.appTextControls = new Array();
+        this.currentWork=null;
     }
 
     loadWork(workToLoad) {
