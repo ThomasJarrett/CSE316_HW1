@@ -30,6 +30,7 @@ export default class GoLogoLoView extends AppsterView {
 
         
         this.buildTextButton(editTextButton);
+        
 
         toolbar.appendChild(editTextButton);
         toolbar.appendChild(this.buildElement(AppsterHTML.BR));
@@ -59,6 +60,8 @@ export default class GoLogoLoView extends AppsterView {
 
         workspace.appendChild(toolbar);
         workspace.appendChild(textDiv);
+
+        //this.buildTrashCan();
         return workspace;
     }
 
@@ -178,6 +181,17 @@ export default class GoLogoLoView extends AppsterView {
         if(element){
             var newElem=element.cloneNode(true);
             element.parentNode.replaceChild(newElem, element);
+        }
+    }
+
+    buildTrashCan(){
+        let trash=document.getElementById(AppsterGUIId.APPSTER_EDIT_TRASH);
+        let it=this;
+        if(trash){
+            trash.addEventListener("click",()=>{
+                let temp=document.getElementById(AppsterGUIId.APPSTER_YES_NO_MODAL);
+                it.displayElement(temp);
+            })
         }
     }
 

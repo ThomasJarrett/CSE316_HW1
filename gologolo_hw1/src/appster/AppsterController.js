@@ -119,9 +119,9 @@ export default class AppsterController {
      * button in the popup dialog after having requested to delete
      * the loaded work.
      */
-    processCancelDeleteWork() {
+    processCancelDeleteWork=()=> {
         // JUST HIDE THE DIALOG
-
+        this.model.view.hideDialog();
     }
 
     /**
@@ -140,7 +140,7 @@ export default class AppsterController {
      * button in the popup dialog after having requested to delete
      * the loaded work.
      */
-    processConfirmDeleteWork() {
+    processConfirmDeleteWork=()=> {
         // DELETE THE WORK
         this.model.removeWork(this.model.getWorkToEdit());
 
@@ -153,9 +153,15 @@ export default class AppsterController {
      * button, i.e. the delete button, in order to delete the
      * list being edited.
      */
-    processDeleteWork() {
+    processDeleteWork=()=> {
         // VERIFY VIA A DIALOG BOX
-        window.todo.model.view.showDialog();
+        this.model.view.showDialog();
+        let confirm=this.getRefreshedElementById(AppsterGUIId.APPSTER_YES_NO_MODAL_YES_BUTTON);
+        let it=this;
+        confirm.addEventListener("click",it.processConfirmDeleteWork);
+        let noButton=this.getRefreshedElementById(AppsterGUIId.APPSTER_YES_NO_MODAL_NO_BUTTON);
+        noButton.addEventListener("click",it.processCancelDeleteWork);
+        
     }
 
     /**
@@ -190,7 +196,6 @@ export default class AppsterController {
         this.resetElement(enterButton);
         enterButton=document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON);
         
-        enterButton.remove
         enterButton.addEventListener("click",()=>{
             let name=textInput.value;
             if(this.validName(name)){
@@ -233,11 +238,9 @@ export default class AppsterController {
     }
     removeErrorMessage(){
         let temp=document.getElementById("error_message");
-        //console.log(temp);
+  
         if(temp){
             temp.parentNode.removeChild(temp);
-            //this.removeErrorMessage();
-            //console.log(temp);
         }
         temp=document.getElementById("error_message");
         console.log(temp);
@@ -255,5 +258,9 @@ export default class AppsterController {
         var newElem=element.cloneNode(true);
         element.parentNode.replaceChild(newElem, element);
     }
+   }
+   getRefreshedElementById(id){
+       this.resetElement(document.getElementById(id));
+       return document.getElementById(id);
    }
 }
