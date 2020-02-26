@@ -18,7 +18,14 @@ export default class GoLogoLoController
     addErrorMessage(){
         let modalFrame=document.getElementById("appster_text_input_modal_frame");
         if(document.getElementById("error_message")){
-
+            let errorMessage=document.getElementById("error_message");
+            //errorMessage.style.color="blue";
+            if (errorMessage.style.color=="red"){
+                errorMessage.style.color="blue";
+            }
+            else{
+                errorMessage.style.color="red";
+            }
         }
         else{
             let errorMessage=document.createElement("p");
