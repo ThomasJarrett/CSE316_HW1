@@ -1,7 +1,7 @@
 import {GoLogoLoGUIClass, GoLogoLoGUIId, GoLogoLoText, GoLogoLoAttr,GoLogoLoSetters} from './GoLogoLoConstants.js'
 import {AppsterHTML, AppsterSymbols, AppsterGUIId, AppsterGUIClass} from '../appster/AppsterConstants.js'
 import AppsterView from '../appster/AppsterView.js'
-
+//https://github.com/ThomasJarrett/CSE316_HW1
 export default class GoLogoLoView extends AppsterView {
     constructor() {
         super();
